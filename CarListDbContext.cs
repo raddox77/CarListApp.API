@@ -1,9 +1,10 @@
 using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarListApp.API;
 
-public class CarListDbContext : DbContext
+public class CarListDbContext : IdentityDbContext
 {
     public CarListDbContext(DbContextOptions<CarListDbContext> options) : base(options)
     {
@@ -13,9 +14,9 @@ public class CarListDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)   
     {
-        //base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Car>()
-            .HasKey(c => c.Id);
+        base.OnModelCreating(modelBuilder);
+        //modelBuilder.Entity<Car>()
+            //.HasKey(c => c.Id);
 
         modelBuilder.Entity<Car>().HasData(
             new Car
