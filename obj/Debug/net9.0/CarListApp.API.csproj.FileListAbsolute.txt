@@ -157,3 +157,4 @@ Y:\DOTNET\CarListApp.API\obj\Debug\net9.0\CarListApp.API.pdb
 Y:\DOTNET\CarListApp.API\obj\Debug\net9.0\CarListApp.API.genruntimeconfig.cache
 Y:\DOTNET\CarListApp.API\obj\Debug\net9.0\ref\CarListApp.API.dll
 Y:\DOTNET\CarListApp.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+Y:\DOTNET\CarListApp.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
