@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace CarListApp.API;
 
@@ -12,6 +13,15 @@ public class CarListDbContext : IdentityDbContext
     }
 
     public DbSet<Car> Cars { get; set; }    
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+
+        // Suppress the PendingModelChangesWarning
+        optionsBuilder.ConfigureWarnings(warnings =>
+            warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)   
     {
@@ -69,7 +79,11 @@ public class CarListDbContext : IdentityDbContext
                 NormalizedUserName = "ADMIN@LOCALHOST.COM",
                 UserName = "admin@localhost.com",
                 PasswordHash = hasher.HashPassword(null, "P@ssword1"),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                AccessFailedCount = 0,
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false
             },
             new IdentityUser
             {
@@ -79,7 +93,11 @@ public class CarListDbContext : IdentityDbContext
                 NormalizedUserName = "USER@LOCALHOST.COM",
                 UserName = "user@localhost.com",
                 PasswordHash = hasher.HashPassword(null, "P@ssword1"),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                AccessFailedCount = 0,
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false
             }
         );
 
@@ -95,10 +113,5 @@ public class CarListDbContext : IdentityDbContext
                 UserId = "f1c7e3c4-ddc0-429a-a38f-47a8c0618ec5"
             }
         );
-
-   
-
-
-
     }
 }
